@@ -122,6 +122,7 @@ class ApiRepository
         $amount = $request->get('amount');
 
         try {
+            // @TODO need db transactions commit and rollback for disaster scenario
             $balanceResult = $this->checkBalanceControl($senderCustomerId, $amount);
 
             if ($balanceResult) {
