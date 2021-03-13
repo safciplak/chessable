@@ -16,7 +16,9 @@ class CreateBankBranchesTable extends Migration
         Schema::create('bank_branches', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('bank_id');
-            $table->point('location');
+            $table->string('name');
+            $table->decimal('latitude');
+            $table->decimal('longitude');
             $table->timestamps();
         });
     }

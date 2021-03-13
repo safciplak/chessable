@@ -13,12 +13,7 @@ class CreateBankCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::create('bank_customers', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('bank_branch_id');
-            $table->unsignedInteger('customer_id');
-            $table->timestamps();
-        });
+
     }
 
     /**

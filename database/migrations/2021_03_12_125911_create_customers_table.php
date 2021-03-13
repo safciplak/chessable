@@ -15,6 +15,7 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->integer('bank_branch_id');
             $table->string('name');
             $table->decimal('balance');
             $table->timestamps();
