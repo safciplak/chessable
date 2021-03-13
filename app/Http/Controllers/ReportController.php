@@ -31,6 +31,11 @@ class ReportController extends Controller
         return $this->reportRepository->findByBranchHigherBalance();
     }
 
+    /**
+     * At Least Two Customer With Balance 50.000 for each Branch.
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function atLeastTwoCustomerWith50k()
     {
         return $this->reportRepository->atLeastTwoCustomerWith50k();
