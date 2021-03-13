@@ -14,6 +14,7 @@ class ApiController extends Controller
 
     /**
      * ApiController constructor.
+     *
      * @param ApiRepository $apiRepository
      */
     public function __construct(ApiRepository $apiRepository)
@@ -23,6 +24,7 @@ class ApiController extends Controller
 
     /**
      * Create Bank.
+     *
      * @param Request $request
      */
     public function createBank(Request $request)

@@ -12,15 +12,17 @@ class ApiRepository
     /**
      * Create Bank.
      *
-     * @param Request $request
+     * @param  Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function createBank(Request $request)
     {
         try {
-            $validatedData = $request->validate([
+            $validatedData = $request->validate(
+                [
                 'name' => 'required|unique:banks'
-            ]);
+                ]
+            );
 
             $validatedData['created_at'] = Carbon::now();
             $validatedData['updated_at'] = Carbon::now();
@@ -28,12 +30,14 @@ class ApiRepository
             $id = DB::table('banks')
                 ->insertGetId($validatedData);
 
-            return response()->json([
+            return response()->json(
+                [
                 'data' => [
                     'bank_id' => $id
                 ],
                 'message' => 'Your bank has been successfully created'
-            ], 201);
+                ], 201
+            );
         } catch (\Exception $exception) {
             return response()->json(['message' => $exception->getMessage()]);
         }
@@ -42,18 +46,20 @@ class ApiRepository
     /**
      * Create Bank Branch.
      *
-     * @param Request $request
+     * @param  Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function createBankBranch(Request $request)
     {
         try {
-            $validatedData = $request->validate([
+            $validatedData = $request->validate(
+                [
                 'name' => 'required|unique:bank_branches',
                 'bank_id' => 'required',
                 'latitude' => 'required',
                 'longitude' => 'required',
-            ]);
+                ]
+            );
 
             $validatedData['created_at'] = Carbon::now();
             $validatedData['updated_at'] = Carbon::now();
@@ -61,9 +67,11 @@ class ApiRepository
             DB::table('bank_branches')
                 ->insert($validatedData);
 
-            return response()->json([
+            return response()->json(
+                [
                 'message' => 'Your bank branch has been successfully created'
-            ], 201);
+                ], 201
+            );
         } catch (\Exception $exception) {
             return response()->json(['message' => $exception->getMessage()]);
         }
@@ -72,16 +80,18 @@ class ApiRepository
     /**
      * Create Customer.
      *
-     * @param Request $request
+     * @param  Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function createCustomer(Request $request)
     {
         try {
-            $validatedData = $request->validate([
+            $validatedData = $request->validate(
+                [
                 'name' => 'required|unique:customers',
                 'bank_branch_id' => 'required',
-            ]);
+                ]
+            );
 
             $validatedData['balance'] = Customer::INITIAL_BALANCE;
             $validatedData['created_at'] = Carbon::now();
@@ -90,9 +100,11 @@ class ApiRepository
             DB::table('customers')
                 ->insert($validatedData);
 
-            return response()->json([
+            return response()->json(
+                [
                 'message' => 'Your customer has been successfully created'
-            ], 201);
+                ], 201
+            );
         } catch (\Exception $exception) {
             return response()->json(['message' => $exception->getMessage()]);
         }
@@ -153,8 +165,8 @@ class ApiRepository
     /**
      * Check Balance Control.
      *
-     * @param $senderCustomerId
-     * @param $amount
+     * @param  $senderCustomerId
+     * @param  $amount
      * @return bool|\Illuminate\Http\JsonResponse
      */
     private function checkBalanceControl($senderCustomerId, $amount)
